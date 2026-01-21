@@ -17,15 +17,10 @@
 
 <html>
   <head>
-    <title>Multi Encrypted Video</title>
+    <title>Video Elements With Background</title>
     <style>
         body {
           margin: 0;
-        }
-
-        #primary-player-layer {
-          width: 100%;
-          height: 100%;
         }
 
         video {
@@ -33,41 +28,36 @@
           height: 100%;
         }
 
-        #secondary-player-layer {
-          position: absolute;
-          top: 60%;
-          height: 40%;
-          width: 100%;
-          padding: 24px;
+        #ui-layer {
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
+          position: absolute;
+          top: 15%;
+          height: 85%;
+          width: 100%;
+          background-color: rgba(33, 33, 33, .75);
+          padding: 24px;
+          margin: auto;
         }
 
         .item {
-          width: 426px;
+          width: 320px;
           height: 240px;
           display: inline-block;
           margin: 24px;
           vertical-align: middle;
-          background-color: rgba(33, 33, 33, .75);
         }
     </style>
   </head>
   <body>
-    <div id="primary-player-layer">
-      <video id="primary-video" muted="1" autoplay="1" loop></video>
+    <div id="ui-layer">
+      <div class="item">
+        <video id="video2" muted="1"
+           style="background-image: url(sddefault.jpg);
+                  background-size: 320px 240px;">
+        </video>
+      </div>
     </div>
-    <!-- <div id="secondary-player-layer">
-      <div class="item">
-        <video id="secondary-video-1" muted="1" autoplay="1" loop></video>
-      </div>
-      <div class="item">
-        <video id="secondary-video-2" muted="1" autoplay="1" loop></video>
-      </div>
-      <div class="item">
-        <video id="secondary-video-3" muted="1" autoplay="1" loop></video>
-      </div>
-    </div> -->
-    <script src="multi-encrypted-video.js"></script>
+    <script src="video-background-demo.js"></script>
   </body>
 </html>

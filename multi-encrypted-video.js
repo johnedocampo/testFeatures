@@ -63,23 +63,23 @@ const MEDIA_FILES = {
 
   'vp9-720p-mp4': {
     contentType: 'video/mp4; codecs="vp09.00.40.08"',
-    url: 'https://jasonzhangxx.github.io/test/test_vp9.mp4',
+    url: 'https://johnedocampo.github.io/test_vp9.mp4',
     maxVideoCapabilities: 'width=1280; height=720',
   },
 
   'h264-240p-30fps' : {
     contentType: 'video/mp4; codecs="avc1.640028"',
-    url: 'https://jasonzhangxx.github.io/test/test-materials_media_big-buck-bunny-h264-240p-30fps.mp4',
+    url: 'https://johnedocampo.github.io/test-materials_media_big-buck-bunny-h264-240p-30fps.mp4',
     maxVideoCapabilities: 'width=320; height=240',
   },
   'av1-clear' : {
     contentType: 'video/mp4; codecs="av01.0.08M.08 "',
-    url: 'https://jasonzhangxx.github.io/test/test_av1.mp4',
+    url: 'https://johnedocampo.github.io/test_av1.mp4',
     maxVideoCapabilities: 'width=1920; height=1080',
   },
   'opus_mp4': {
     contentType: 'audio/mp4; codecs="opus"',
-    url: 'https://jasonzhangxx.github.io/test/opus.mp4',
+    url: 'https://johnedocampo.github.io/opus.mp4',
   },
 };
 
@@ -189,7 +189,7 @@ async function play(videoElementId, videoFileId, optionalAudioFileId) {
 
   var mediaSource = new MediaSource();
   mediaSource.addEventListener('sourceopen', async function() {
-    // var videoSourceBuffer = mediaSource.addSourceBuffer(videoContentType);
+    var videoSourceBuffer = mediaSource.addSourceBuffer(videoContentType);
     var audioSourceBuffer;
 
     if (optionalAudioFileId) {
@@ -201,11 +201,11 @@ async function play(videoElementId, videoFileId, optionalAudioFileId) {
       audioSourceBuffer.appendBuffer(audioArrayBuffer);
     }
 
-    // var videoArrayBuffer = await fetchMediaData(videoFileId);
-    // videoSourceBuffer.addEventListener("updateend", () => {
-    //   mediaSource.endOfStream();
-    // });
-    // videoSourceBuffer.appendBuffer(videoArrayBuffer);
+    var videoArrayBuffer = await fetchMediaData(videoFileId);
+    videoSourceBuffer.addEventListener("updateend", () => {
+      mediaSource.endOfStream();
+    });
+    videoSourceBuffer.appendBuffer(videoArrayBuffer);
   });
 
   videoElement.src = URL.createObjectURL(mediaSource);
